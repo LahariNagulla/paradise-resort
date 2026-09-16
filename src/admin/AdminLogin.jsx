@@ -19,7 +19,7 @@ export default function AdminLogin() {
 
     if (
       email === "admin@paradiseresort.com" &&
-      password === "admin123"
+      password === "resort123"
     ) {
       window.location.href = "/admin/dashboard";
     } else {

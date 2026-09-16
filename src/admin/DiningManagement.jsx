@@ -60,8 +60,6 @@ export default function DiningManagement() {
   const [filter, setFilter] = useState("All");
   const [search, setSearch] = useState("");
   const [showAddModal, setShowAddModal] = useState(false);
-  const [selectedDining, setSelectedDining] = useState(null);
-
   const [newRestaurant, setNewRestaurant] = useState({
     name: "",
     type: "Restaurant",
@@ -204,17 +202,29 @@ export default function DiningManagement() {
           Experiences
         </button>
 
-        <button style={styles.menuButton}>
+        <button
+          type="button"
+          style={styles.menuButton}
+          onClick={() => navigate("/admin/offers")}
+        >
           <span>◇</span>
           Offers
         </button>
 
-        <button style={styles.menuButton}>
+        <button
+          type="button"
+          style={styles.menuButton}
+          onClick={() => navigate("/admin/gallery")}
+        >
           <span>▧</span>
           Gallery
         </button>
 
-        <button style={styles.menuButton}>
+        <button
+          type="button"
+          style={styles.menuButton}
+          onClick={() => navigate("/admin/settings")}
+        >
           <span>⚙</span>
           Settings
         </button>
@@ -231,9 +241,9 @@ export default function DiningManagement() {
       </aside>
 
       {/* MAIN */}
-      <main style={styles.main}>
+      <main className="dining-main" style={styles.main}>
         {/* HEADER */}
-        <header style={styles.header}>
+        <header className="dining-header" style={styles.header}>
           <div>
             <div style={styles.breadcrumb}>
               ADMIN / DINING
@@ -258,7 +268,7 @@ export default function DiningManagement() {
         </header>
 
         {/* STATS */}
-        <section style={styles.statsGrid}>
+        <section className="dining-stats" style={styles.statsGrid}>
           <StatCard
             label="Total Outlets"
             value={total}
@@ -285,7 +295,7 @@ export default function DiningManagement() {
         </section>
 
         {/* TOOLBAR */}
-        <section style={styles.toolbar}>
+        <section className="dining-toolbar" style={styles.toolbar}>
           <div style={styles.filters}>
             {["All", "Open", "Closed"].map((item) => (
               <button
@@ -308,12 +318,13 @@ export default function DiningManagement() {
             placeholder="Search dining outlets..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
+            className="dining-search"
             style={styles.search}
           />
         </section>
 
         {/* DINING CARDS */}
-        <section style={styles.grid}>
+        <section className="dining-grid" style={styles.grid}>
           <AnimatePresence>
             {filteredDining.map((item, index) => (
               <motion.div
@@ -385,14 +396,6 @@ export default function DiningManagement() {
                   </p>
 
                   <div style={styles.actions}>
-                    <button
-                      style={styles.viewButton}
-                      onClick={() =>
-                        setSelectedDining(item)
-                      }
-                    >
-                      View Details
-                    </button>
 
                     <button
                       style={styles.statusButton}
@@ -621,96 +624,6 @@ export default function DiningManagement() {
                   </button>
                 </div>
               </form>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-
-      {/* DETAILS MODAL */}
-      <AnimatePresence>
-        {selectedDining && (
-          <motion.div
-            style={styles.modalBackdrop}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={() => setSelectedDining(null)}
-          >
-            <motion.div
-              style={styles.detailsModal}
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.95 }}
-              onClick={(e) => e.stopPropagation()}
-            >
-              <div style={styles.cardImageLarge}>
-                <span style={styles.imageText}>
-                  PARADISE
-                </span>
-
-                <button
-                  style={styles.modalCloseFloating}
-                  onClick={() =>
-                    setSelectedDining(null)
-                  }
-                >
-                  ×
-                </button>
-              </div>
-
-              <div style={styles.detailsContent}>
-                <span style={styles.modalEyebrow}>
-                  {selectedDining.id}
-                </span>
-
-                <h2 style={styles.detailsTitle}>
-                  {selectedDining.name}
-                </h2>
-
-                <p style={styles.detailsType}>
-                  {selectedDining.type}
-                </p>
-
-                <div style={styles.detailsGrid}>
-                  <Detail
-                    label="Cuisine"
-                    value={selectedDining.cuisine}
-                  />
-
-                  <Detail
-                    label="Price"
-                    value={selectedDining.price}
-                  />
-
-                  <Detail
-                    label="Hours"
-                    value={selectedDining.hours}
-                  />
-
-                  <Detail
-                    label="Capacity"
-                    value={selectedDining.capacity}
-                  />
-
-                  <Detail
-                    label="Status"
-                    value={selectedDining.status}
-                  />
-                </div>
-
-                <p style={styles.detailsDescription}>
-                  {selectedDining.description}
-                </p>
-
-                <button
-                  style={styles.saveButton}
-                  onClick={() =>
-                    setSelectedDining(null)
-                  }
-                >
-                  Close Details
-                </button>
-              </div>
             </motion.div>
           </motion.div>
         )}
@@ -1046,16 +959,6 @@ const styles = {
     justifyContent: "center",
   },
 
-  cardImageLarge: {
-    height: 190,
-    background:
-      "linear-gradient(135deg, #123a40, #0b2027 55%, #142e31)",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    position: "relative",
-  },
-
   imageText: {
     fontFamily: "Georgia, serif",
     fontSize: 24,
@@ -1144,17 +1047,6 @@ const styles = {
     flexWrap: "wrap",
   },
 
-  viewButton: {
-    flex: 1,
-    minWidth: 100,
-    border: "1px solid rgba(201,168,106,0.4)",
-    background: "transparent",
-    color: "#d8bc84",
-    padding: "9px 10px",
-    borderRadius: 7,
-    fontSize: 11,
-  },
-
   statusButton: {
     border: "1px solid rgba(255,255,255,0.08)",
     background: "transparent",
@@ -1201,16 +1093,6 @@ const styles = {
     padding: 28,
   },
 
-  detailsModal: {
-    width: "min(600px, 100%)",
-    maxHeight: "90vh",
-    overflowY: "auto",
-    background: "#0b1d22",
-    border: "1px solid rgba(255,255,255,0.09)",
-    borderRadius: 15,
-    overflow: "hidden",
-  },
-
   modalHeader: {
     display: "flex",
     justifyContent: "space-between",
@@ -1237,19 +1119,6 @@ const styles = {
     border: "1px solid rgba(255,255,255,0.1)",
     background: "transparent",
     color: "#aeb8ba",
-    fontSize: 20,
-  },
-
-  modalCloseFloating: {
-    position: "absolute",
-    top: 15,
-    right: 15,
-    width: 34,
-    height: 34,
-    borderRadius: "50%",
-    border: "none",
-    background: "rgba(0,0,0,0.45)",
-    color: "#fff",
     fontSize: 20,
   },
 
@@ -1304,55 +1173,5 @@ const styles = {
     color: "#07151a",
     borderRadius: 7,
     fontWeight: 700,
-  },
-
-  detailsContent: {
-    padding: 28,
-  },
-
-  detailsTitle: {
-    margin: "8px 0 4px",
-    fontFamily: "Georgia, serif",
-    fontWeight: 400,
-    fontSize: 28,
-  },
-
-  detailsType: {
-    color: "#c9a86a",
-    fontSize: 12,
-    margin: 0,
-  },
-
-  detailsGrid: {
-    display: "grid",
-    gridTemplateColumns:
-      "repeat(2, minmax(0, 1fr))",
-    gap: 12,
-    margin: "25px 0",
-  },
-
-  detailItem: {
-    padding: 13,
-    borderRadius: 8,
-    background: "rgba(255,255,255,0.025)",
-  },
-
-  detailLabel: {
-    display: "block",
-    fontSize: 9,
-    color: "#718084",
-    marginBottom: 5,
-  },
-
-  detailValue: {
-    fontSize: 12,
-    color: "#e4e0d8",
-  },
-
-  detailsDescription: {
-    color: "#8c999b",
-    fontSize: 12,
-    lineHeight: 1.7,
-    marginBottom: 22,
   },
 };

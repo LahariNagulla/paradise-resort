@@ -81,9 +81,6 @@ export default function ExperiencesManagement() {
   const [filter, setFilter] = useState("All");
   const [search, setSearch] = useState("");
   const [showAddModal, setShowAddModal] = useState(false);
-  const [selectedExperience, setSelectedExperience] =
-    useState(null);
-
   const [newExperience, setNewExperience] = useState({
     name: "",
     category: "Water Experience",
@@ -162,9 +159,6 @@ export default function ExperiencesManagement() {
       prev.filter((item) => item.id !== id)
     );
 
-    if (selectedExperience?.id === id) {
-      setSelectedExperience(null);
-    }
   };
 
   const toggleStatus = (id) => {
@@ -203,9 +197,7 @@ export default function ExperiencesManagement() {
 
         <button
           style={styles.menuButton}
-          onClick={() => {
-            window.location.href = "/admin/dashboard";
-          }}
+          onClick={() => navigate("/admin/dashboard")}
         >
           <span>▦</span>
           Dashboard
@@ -213,9 +205,7 @@ export default function ExperiencesManagement() {
 
         <button
           style={styles.menuButton}
-          onClick={() => {
-            window.location.href = "/admin/bookings";
-          }}
+          onClick={() => navigate("/admin/bookings")}
         >
           <span>▣</span>
           Bookings
@@ -223,9 +213,7 @@ export default function ExperiencesManagement() {
 
         <button
           style={styles.menuButton}
-          onClick={() => {
-            window.location.href = "/admin/rooms";
-          }}
+          onClick={() => navigate("/admin/rooms")}
         >
           <span>▤</span>
           Rooms
@@ -233,9 +221,7 @@ export default function ExperiencesManagement() {
 
         <button
           style={styles.menuButton}
-          onClick={() => {
-            window.location.href = "/admin/dining";
-          }}
+          onClick={() => navigate("/admin/dining")}
         >
           <span>🍽</span>
           Dining
@@ -251,17 +237,17 @@ export default function ExperiencesManagement() {
           Experiences
         </button>
 
-        <button style={styles.menuButton}>
+        <button style={styles.menuButton} onClick={() => navigate("/admin/offers")}>
           <span>◇</span>
           Offers
         </button>
 
-        <button style={styles.menuButton}>
+        <button style={styles.menuButton} onClick={() => navigate("/admin/gallery")}>
           <span>▧</span>
           Gallery
         </button>
 
-        <button style={styles.menuButton}>
+        <button style={styles.menuButton} onClick={() => navigate("/admin/settings")}>
           <span>⚙</span>
           Settings
         </button>
@@ -487,19 +473,6 @@ export default function ExperiencesManagement() {
                     <div
                       style={styles.actions}
                     >
-                      <button
-                        style={
-                          styles.viewButton
-                        }
-                        onClick={() =>
-                          setSelectedExperience(
-                            item
-                          )
-                        }
-                      >
-                        View Details
-                      </button>
-
                       <button
                         style={
                           styles.statusButton
@@ -826,159 +799,6 @@ export default function ExperiencesManagement() {
         )}
       </AnimatePresence>
 
-      {/* ================= DETAILS MODAL ================= */}
-
-      <AnimatePresence>
-        {selectedExperience && (
-          <motion.div
-            style={
-              styles.modalBackdrop
-            }
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={() =>
-              setSelectedExperience(
-                null
-              )
-            }
-          >
-            <motion.div
-              style={
-                styles.detailsModal
-              }
-              initial={{
-                opacity: 0,
-                scale: 0.95,
-              }}
-              animate={{
-                opacity: 1,
-                scale: 1,
-              }}
-              exit={{
-                opacity: 0,
-                scale: 0.95,
-              }}
-              onClick={(e) =>
-                e.stopPropagation()
-              }
-            >
-              <div
-                style={
-                  styles.cardImageLarge
-                }
-              >
-                <span
-                  style={
-                    styles.imageText
-                  }
-                >
-                  PARADISE
-                </span>
-
-                <button
-                  style={
-                    styles.modalCloseFloating
-                  }
-                  onClick={() =>
-                    setSelectedExperience(
-                      null
-                    )
-                  }
-                >
-                  ×
-                </button>
-              </div>
-
-              <div
-                style={
-                  styles.detailsContent
-                }
-              >
-                <span
-                  style={
-                    styles.modalEyebrow
-                  }
-                >
-                  {selectedExperience.id}
-                </span>
-
-                <h2
-                  style={
-                    styles.detailsTitle
-                  }
-                >
-                  {selectedExperience.name}
-                </h2>
-
-                <p
-                  style={
-                    styles.detailsType
-                  }
-                >
-                  {selectedExperience.category}
-                </p>
-
-                <div
-                  style={
-                    styles.detailsGrid
-                  }
-                >
-                  <Detail
-                    label="Duration"
-                    value={
-                      selectedExperience.duration
-                    }
-                  />
-
-                  <Detail
-                    label="Price"
-                    value={`₹${selectedExperience.price.toLocaleString(
-                      "en-IN"
-                    )}`}
-                  />
-
-                  <Detail
-                    label="Capacity"
-                    value={`${selectedExperience.capacity} guests`}
-                  />
-
-                  <Detail
-                    label="Status"
-                    value={
-                      selectedExperience.status
-                    }
-                  />
-                </div>
-
-                <p
-                  style={
-                    styles.detailsDescription
-                  }
-                >
-                  {
-                    selectedExperience.description
-                  }
-                </p>
-
-                <button
-                  style={
-                    styles.saveButton
-                  }
-                  onClick={() =>
-                    setSelectedExperience(
-                      null
-                    )
-                  }
-                >
-                  Close Details
-                </button>
-              </div>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-
       {/* ================= RESPONSIVE ================= */}
 
       <style>{`
@@ -1075,22 +895,6 @@ function FormField({
         required
         style={styles.input}
       />
-    </div>
-  );
-}
-
-/* ================= DETAIL ================= */
-
-function Detail({ label, value }) {
-  return (
-    <div style={styles.detailItem}>
-      <span style={styles.detailLabel}>
-        {label}
-      </span>
-
-      <strong style={styles.detailValue}>
-        {value}
-      </strong>
     </div>
   );
 }
@@ -1364,15 +1168,6 @@ const styles = {
     justifyContent: "center",
   },
 
-  cardImageLarge: {
-    height: 190,
-    background:
-      "linear-gradient(135deg,#123a40,#0b2027 55%,#142e31)",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    position: "relative",
-  },
 
   imageText: {
     fontFamily: "Georgia, serif",
@@ -1469,17 +1264,6 @@ const styles = {
     flexWrap: "wrap",
   },
 
-  viewButton: {
-    flex: 1,
-    minWidth: 100,
-    border:
-      "1px solid rgba(201,168,106,0.4)",
-    background: "transparent",
-    color: "#d8bc84",
-    padding: "9px 10px",
-    borderRadius: 7,
-    fontSize: 11,
-  },
 
   statusButton: {
     border:
@@ -1532,17 +1316,6 @@ const styles = {
     padding: 28,
   },
 
-  detailsModal: {
-    width:
-      "min(600px,100%)",
-    maxHeight: "90vh",
-    overflowY: "auto",
-    background: "#0b1d22",
-    border:
-      "1px solid rgba(255,255,255,0.09)",
-    borderRadius: 15,
-    overflow: "hidden",
-  },
 
   modalHeader: {
     display: "flex",
@@ -1575,19 +1348,6 @@ const styles = {
     fontSize: 20,
   },
 
-  modalCloseFloating: {
-    position: "absolute",
-    top: 15,
-    right: 15,
-    width: 34,
-    height: 34,
-    borderRadius: "50%",
-    border: "none",
-    background:
-      "rgba(0,0,0,0.45)",
-    color: "#fff",
-    fontSize: 20,
-  },
 
   formGrid: {
     display: "grid",
@@ -1645,55 +1405,5 @@ const styles = {
     fontWeight: 700,
   },
 
-  detailsContent: {
-    padding: 28,
-  },
 
-  detailsTitle: {
-    margin:
-      "8px 0 4px",
-    fontFamily: "Georgia, serif",
-    fontWeight: 400,
-    fontSize: 28,
-  },
-
-  detailsType: {
-    color: "#c9a86a",
-    fontSize: 12,
-    margin: 0,
-  },
-
-  detailsGrid: {
-    display: "grid",
-    gridTemplateColumns:
-      "repeat(2,minmax(0,1fr))",
-    gap: 12,
-    margin: "25px 0",
-  },
-
-  detailItem: {
-    padding: 13,
-    borderRadius: 8,
-    background:
-      "rgba(255,255,255,0.025)",
-  },
-
-  detailLabel: {
-    display: "block",
-    fontSize: 9,
-    color: "#718084",
-    marginBottom: 5,
-  },
-
-  detailValue: {
-    fontSize: 12,
-    color: "#e4e0d8",
-  },
-
-  detailsDescription: {
-    color: "#8c999b",
-    fontSize: 12,
-    lineHeight: 1.7,
-    marginBottom: 22,
-  },
 };
