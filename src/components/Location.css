@@ -1,0 +1,517 @@
+/* =====================================================
+   LOCATION SECTION
+===================================================== */
+
+.location-section {
+  position: relative;
+  width: 100%;
+  padding: 120px 7%;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(7, 27, 31, 1),
+      rgba(5, 20, 23, 0.98)
+    );
+  color: #ffffff;
+  overflow: hidden;
+}
+
+.location-section::before {
+  content: "";
+  position: absolute;
+  width: 520px;
+  height: 520px;
+  left: -280px;
+  bottom: -280px;
+  border-radius: 50%;
+  background: rgba(196, 157, 77, 0.06);
+  filter: blur(35px);
+  pointer-events: none;
+}
+
+.location-container {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 1250px;
+  margin: 0 auto;
+}
+
+
+/* =====================================================
+   HEADING
+===================================================== */
+
+.location-heading {
+  max-width: 720px;
+  margin: 0 auto 60px;
+  text-align: center;
+}
+
+.location-eyebrow {
+  display: inline-block;
+  margin-bottom: 15px;
+  color: #c9a45c;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 3px;
+}
+
+.location-heading h2 {
+  margin: 0;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(40px, 5vw, 62px);
+  font-weight: 400;
+  line-height: 1.1;
+}
+
+.location-heading h2 span {
+  color: #d2ad65;
+  font-style: italic;
+}
+
+.location-heading p {
+  max-width: 620px;
+  margin: 18px auto 0;
+  color: #91a1a3;
+  font-size: 15px;
+  line-height: 1.8;
+}
+
+
+/* =====================================================
+   MAIN CONTENT
+===================================================== */
+
+.location-content {
+  display: grid;
+  grid-template-columns: 1.35fr 0.85fr;
+  gap: 45px;
+  align-items: stretch;
+}
+
+
+/* =====================================================
+   MAP
+===================================================== */
+
+.location-map {
+  position: relative;
+  min-height: 520px;
+
+  overflow: hidden;
+
+  border: 1px solid rgba(201, 164, 92, 0.2);
+
+  background: #071c20;
+
+  box-shadow:
+    0 25px 70px rgba(0, 0, 0, 0.25);
+}
+
+.location-map::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  border: 1px solid rgba(255, 255, 255, 0.04);
+
+  pointer-events: none;
+}
+
+.location-map iframe {
+  display: block;
+
+  width: 100%;
+  height: 100%;
+  min-height: 520px;
+
+  border: 0;
+
+  filter: grayscale(0.15) contrast(0.95);
+}
+
+
+/* =====================================================
+   LOCATION DETAILS
+===================================================== */
+
+.location-details {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  padding: 45px;
+
+  border: 1px solid rgba(255, 255, 255, 0.08);
+
+  background:
+    rgba(255, 255, 255, 0.025);
+
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.details-eyebrow {
+  margin-bottom: 12px;
+
+  color: #c9a45c;
+
+  font-size: 11px;
+  font-weight: 600;
+
+  letter-spacing: 2.5px;
+}
+
+.location-details h3 {
+  margin: 0;
+
+  font-family: Georgia, "Times New Roman", serif;
+
+  color: #f5f5f2;
+
+  font-size: 38px;
+  font-weight: 400;
+  line-height: 1.2;
+}
+
+.location-description {
+  margin: 18px 0 35px;
+
+  color: #8e9c9e;
+
+  font-size: 13px;
+
+  line-height: 1.9;
+}
+
+
+/* =====================================================
+   LOCATION INFO
+===================================================== */
+
+.location-info-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+
+  padding: 18px 0;
+
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.location-icon {
+  width: 38px;
+  height: 38px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  border: 1px solid rgba(201, 164, 92, 0.25);
+
+  background: rgba(201, 164, 92, 0.06);
+
+  color: #d2ad65;
+
+  font-size: 15px;
+}
+
+.location-info-item strong {
+  display: block;
+
+  margin-bottom: 5px;
+
+  color: #dfe3e3;
+
+  font-size: 12px;
+  font-weight: 500;
+
+  letter-spacing: 0.5px;
+}
+
+.location-info-item p {
+  margin: 0;
+
+  color: #819092;
+
+  font-size: 12px;
+
+  line-height: 1.7;
+}
+
+
+/* =====================================================
+   DIRECTIONS BUTTON
+===================================================== */
+
+.directions-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+
+  width: fit-content;
+
+  margin-top: 28px;
+
+  padding: 14px 24px;
+
+  border: 1px solid rgba(201, 164, 92, 0.55);
+
+  background: transparent;
+
+  color: #d5b56e;
+
+  font-size: 11px;
+  font-weight: 500;
+
+  letter-spacing: 1.5px;
+
+  text-decoration: none;
+
+  transition:
+    background 0.3s ease,
+    color 0.3s ease,
+    border-color 0.3s ease,
+    transform 0.3s ease;
+}
+
+.directions-button span {
+  font-size: 16px;
+}
+
+.directions-button:hover {
+  background: #c9a45c;
+
+  border-color: #c9a45c;
+
+  color: #07181b;
+
+  transform: translateY(-2px);
+}
+
+
+/* =====================================================
+   NEARBY SECTION
+===================================================== */
+
+.nearby-section {
+  margin-top: 60px;
+}
+
+.nearby-eyebrow {
+  display: block;
+
+  margin-bottom: 20px;
+
+  color: #718083;
+
+  font-size: 10px;
+  font-weight: 600;
+
+  letter-spacing: 2.5px;
+}
+
+.nearby-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 15px;
+}
+
+.nearby-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+
+  min-height: 90px;
+
+  padding: 18px;
+
+  border: 1px solid rgba(255, 255, 255, 0.07);
+
+  background: rgba(255, 255, 255, 0.025);
+
+  transition:
+    transform 0.3s ease,
+    border-color 0.3s ease,
+    background 0.3s ease;
+}
+
+.nearby-card:hover {
+  transform: translateY(-4px);
+
+  border-color: rgba(201, 164, 92, 0.3);
+
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.nearby-icon {
+  width: 38px;
+  height: 38px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  border-radius: 50%;
+
+  background: rgba(201, 164, 92, 0.08);
+
+  font-size: 16px;
+}
+
+.nearby-card h4 {
+  margin: 0 0 5px;
+
+  color: #e3e6e5;
+
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.nearby-card p {
+  margin: 0;
+
+  color: #697779;
+
+  font-size: 10px;
+}
+
+
+/* =====================================================
+   TABLET
+===================================================== */
+
+@media (max-width: 1000px) {
+
+  .location-section {
+    padding: 95px 5%;
+  }
+
+  .location-content {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .location-map {
+    min-height: 450px;
+  }
+
+  .location-map iframe {
+    min-height: 450px;
+  }
+
+  .location-details {
+    padding: 40px;
+  }
+
+  .nearby-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 600px) {
+
+  .location-section {
+    padding: 75px 20px;
+  }
+
+  .location-heading {
+    margin-bottom: 40px;
+  }
+
+  .location-heading h2 {
+    font-size: 40px;
+  }
+
+  .location-heading p {
+    font-size: 13px;
+  }
+
+  .location-content {
+    gap: 25px;
+  }
+
+  .location-map {
+    min-height: 360px;
+  }
+
+  .location-map iframe {
+    min-height: 360px;
+  }
+
+  .location-details {
+    padding: 28px 22px;
+  }
+
+  .location-details h3 {
+    font-size: 31px;
+  }
+
+  .location-description {
+    margin-bottom: 25px;
+  }
+
+  .directions-button {
+    width: 100%;
+  }
+
+  .nearby-section {
+    margin-top: 45px;
+  }
+
+  .nearby-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .nearby-card {
+    min-height: 75px;
+  }
+
+}
+
+
+/* =====================================================
+   SMALL MOBILE
+===================================================== */
+
+@media (max-width: 430px) {
+
+  .location-section {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .location-heading h2 {
+    font-size: 36px;
+  }
+
+  .location-map {
+    min-height: 300px;
+  }
+
+  .location-map iframe {
+    min-height: 300px;
+  }
+
+  .location-details {
+    padding: 25px 18px;
+  }
+
+  .location-details h3 {
+    font-size: 28px;
+  }
+
+}

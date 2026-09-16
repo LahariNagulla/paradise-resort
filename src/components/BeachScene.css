@@ -1,0 +1,227 @@
+
+
+.resort-background {
+  position: absolute;
+
+  top: 0;
+  left: 50%;
+
+  width: 100vw;
+  height: 100vh;
+
+  transform: translateX(-50%);
+
+  overflow: hidden;
+
+  background: #071c25;
+
+  z-index: 0;
+
+  pointer-events: none;
+}
+
+
+/* ========================================= */
+/* HERO BEACH IMAGE */
+/* ========================================= */
+
+.resort-bg-image {
+  position: absolute;
+
+  top: -3%;
+  left: -3%;
+
+  width: 106%;
+  height: 106%;
+
+  object-fit: cover;
+  object-position: center;
+
+  transform: scale(1.06);
+
+  transition: transform 1.2s ease-out;
+
+  animation: cinematicZoom 18s ease-in-out infinite alternate;
+
+  will-change: transform;
+}
+
+
+/* ========================================= */
+/* WATER LIGHT EFFECT */
+/* ========================================= */
+
+.wave-motion {
+  position: absolute;
+
+  inset: 0;
+
+  background: linear-gradient(
+    110deg,
+    transparent 35%,
+    rgba(255, 255, 255, 0.08) 48%,
+    transparent 60%
+  );
+
+  background-size: 220% 100%;
+
+  animation: waterLight 9s ease-in-out infinite;
+
+  pointer-events: none;
+}
+
+
+/* ========================================= */
+/* SUNSET GLOW */
+/* ========================================= */
+
+.sunset-glow {
+  position: absolute;
+
+  inset: 0;
+
+  background: radial-gradient(
+    circle at 22% 45%,
+    rgba(255, 180, 70, 0.12),
+    transparent 35%
+  );
+
+  animation: sunsetPulse 7s ease-in-out infinite alternate;
+
+  pointer-events: none;
+}
+
+
+/* ========================================= */
+/* HERO OVERLAY */
+/* ========================================= */
+
+.resort-overlay {
+  position: absolute;
+
+  inset: 0;
+
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.08),
+    rgba(0, 0, 0, 0.12)
+  );
+
+  pointer-events: none;
+}
+
+
+/* ========================================= */
+/* FULL WIDTH WEBSITE SECTIONS */
+/* ========================================= */
+
+/*
+   Every main section of the website
+   will occupy the complete browser width.
+*/
+
+.app-shell > section,
+.app-shell > footer {
+  width: 100vw;
+
+  max-width: none;
+
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+
+  position: relative;
+}
+
+
+/* ========================================= */
+/* KEEP SECTION CONTENT ABOVE BACKGROUND */
+/* ========================================= */
+
+.app-shell > section {
+  z-index: 2;
+}
+
+
+/* ========================================= */
+/* FOOTER FULL WIDTH */
+/* ========================================= */
+
+.app-shell > footer {
+  z-index: 2;
+}
+
+
+/* ========================================= */
+/* PREVENT HORIZONTAL SCROLL */
+/* ========================================= */
+
+html,
+body {
+  overflow-x: hidden;
+}
+
+
+/* ========================================= */
+/* CINEMATIC BACKGROUND MOVEMENT */
+/* ========================================= */
+
+@keyframes cinematicZoom {
+  0% {
+    transform: scale(1.06) translate3d(0, 0, 0);
+  }
+
+  100% {
+    transform: scale(1.1) translate3d(-0.8%, -0.4%, 0);
+  }
+}
+
+
+/* ========================================= */
+/* WATER LIGHT MOVEMENT */
+/* ========================================= */
+
+@keyframes waterLight {
+  0% {
+    background-position: 120% 0;
+  }
+
+  50% {
+    background-position: 50% 0;
+  }
+
+  100% {
+    background-position: -20% 0;
+  }
+}
+
+
+/* ========================================= */
+/* SUNSET GLOW ANIMATION */
+/* ========================================= */
+
+@keyframes sunsetPulse {
+  0% {
+    opacity: 0.55;
+  }
+
+  100% {
+    opacity: 0.9;
+  }
+}
+
+
+/* ========================================= */
+/* MOBILE FULL WIDTH */
+/* ========================================= */
+
+@media (max-width: 768px) {
+  .app-shell > section,
+  .app-shell > footer {
+    width: 100vw;
+
+    max-width: none;
+
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+  }
+}
