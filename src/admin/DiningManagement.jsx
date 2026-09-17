@@ -12,6 +12,7 @@ const initialDining = [
     hours: "7:00 AM - 11:00 PM",
     capacity: 80,
     status: "Open",
+    image: "/resort-restaurant.jpg",
     description:
       "A sophisticated all-day dining restaurant offering international cuisine with beautiful resort views.",
   },
@@ -24,6 +25,7 @@ const initialDining = [
     hours: "12:00 PM - 10:30 PM",
     capacity: 50,
     status: "Open",
+    image: "/resort-beach-restaurant.jpg",
     description:
       "A relaxed beachfront restaurant serving fresh seafood and refreshing tropical dishes.",
   },
@@ -36,6 +38,7 @@ const initialDining = [
     hours: "4:00 PM - 12:00 AM",
     capacity: 45,
     status: "Open",
+    image: "/resort-dinner.jpg",
     description:
       "An elegant sunset lounge perfect for signature drinks, light bites and evening relaxation.",
   },
@@ -48,6 +51,7 @@ const initialDining = [
     hours: "8:00 AM - 8:00 PM",
     capacity: 35,
     status: "Closed",
+    image: "/resort-garden.jpg",
     description:
       "A peaceful garden café serving coffee, fresh juices, snacks and casual meals.",
   },
@@ -340,6 +344,11 @@ export default function DiningManagement() {
                 style={styles.card}
               >
                 <div style={styles.cardImage}>
+                  <img
+                    src={item.image}
+                    alt={item.name}
+                    style={styles.cardImagePhoto}
+                  />
                   <div style={styles.imageOverlay}>
                     <span style={styles.outletIcon}>
                       🍽
@@ -357,9 +366,6 @@ export default function DiningManagement() {
                     </span>
                   </div>
 
-                  <span style={styles.imageText}>
-                    PARADISE
-                  </span>
                 </div>
 
                 <div style={styles.cardContent}>
@@ -654,6 +660,61 @@ export default function DiningManagement() {
         @media (max-width: 900px) {
           .dining-sidebar {
             display: none;
+          }
+
+          .dining-main {
+            margin-left: 0 !important;
+            width: 100% !important;
+            padding: 28px 24px !important;
+          }
+
+          .dining-header {
+            align-items: flex-start !important;
+            flex-direction: column !important;
+          }
+
+          .dining-header button {
+            width: 100%;
+            justify-content: center;
+          }
+
+          .dining-stats {
+            grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+          }
+
+          .dining-toolbar {
+            align-items: stretch !important;
+            flex-direction: column !important;
+          }
+
+          .dining-search {
+            width: 100% !important;
+          }
+
+          .dining-grid {
+            grid-template-columns: 1fr !important;
+          }
+        }
+
+        @media (max-width: 480px) {
+          .dining-main {
+            padding: 20px 15px !important;
+          }
+
+          .dining-stats {
+            grid-template-columns: 1fr !important;
+          }
+
+          .dining-header h1 {
+            font-size: 28px !important;
+          }
+
+          .dining-header p {
+            line-height: 1.6;
+          }
+
+          .dining-grid {
+            gap: 15px !important;
           }
         }
       `}</style>
@@ -954,16 +1015,15 @@ const styles = {
     background:
       "linear-gradient(135deg, #123a40, #0b2027 55%, #142e31)",
     position: "relative",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
+    overflow: "hidden",
   },
 
-  imageText: {
-    fontFamily: "Georgia, serif",
-    fontSize: 24,
-    letterSpacing: 6,
-    color: "rgba(255,255,255,0.14)",
+  cardImagePhoto: {
+    width: "100%",
+    height: "100%",
+    display: "block",
+    objectFit: "cover",
+    objectPosition: "center",
   },
 
   imageOverlay: {

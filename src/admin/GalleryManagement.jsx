@@ -1,53 +1,53 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import AdminSidebar from "./AdminSidebar";
-
+import { useNavigate } from "react-router-dom";
 const initialGallery = [
   {
     id: "GL001",
     title: "Paradise Beach",
     category: "Beach",
-    image: "/rest-bg.png",
+    image: "/resort-beach.jpg",
     status: "Active",
     description: "A stunning view of the pristine beach at Paradise Resort.",
   },
+  
   {
     id: "GL002",
-    title: "Luxury Pool",
-    category: "Pool",
-    image: "/rest-bg.png",
-    status: "Active",
-    description: "Relax beside the resort infinity pool with beautiful tropical views.",
-  },
-  {
-    id: "GL003",
     title: "Ocean View Suite",
     category: "Rooms",
-    image: "/rest-bg.png",
+    image: "/resort-suite.jpg",
     status: "Active",
     description: "Elegant accommodation with panoramic ocean views.",
   },
   {
-    id: "GL004",
+    id: "GL003",
     title: "Beach Villa",
     category: "Villas",
-    image: "/rest-bg.png",
+    image: "/resort-villa.jpg",
     status: "Active",
     description: "A private luxury villa designed for an unforgettable beach escape.",
   },
   {
-    id: "GL005",
+    id: "GL004",
     title: "Sunset Dining",
     category: "Dining",
-    image: "/rest-bg.png",
+    image: "/resort-dining.jpg",
     status: "Active",
     description: "An atmospheric dining experience overlooking the ocean at sunset.",
+  },
+  {
+    id: "GL005",
+    title: "Luxury Pool",
+    category: "Pool",
+    image: "/resort-pool.jpg",
+    status: "Active",
+    description: "Relax beside the resort infinity pool with beautiful tropical views.",
   },
   {
     id: "GL006",
     title: "Sunset Cruise",
     category: "Experiences",
-    image: "/rest-bg.png",
+    image: "/resort-cruise.jpg",
     status: "Inactive",
     description: "A memorable cruise experience surrounded by the colors of sunset.",
   },
@@ -55,7 +55,7 @@ const initialGallery = [
     id: "GL007",
     title: "Tropical Garden",
     category: "Resort",
-    image: "/rest-bg.png",
+    image: "/resort-garden.jpg",
     status: "Active",
     description: "Beautiful tropical landscaping throughout the Paradise Resort property.",
   },
@@ -63,7 +63,7 @@ const initialGallery = [
     id: "GL008",
     title: "Private Beach Dinner",
     category: "Dining",
-    image: "/rest-bg.png",
+    image: "/resort-dinner.jpg",
     status: "Active",
     description: "A romantic private dinner setup directly beside the sea.",
   },
@@ -72,12 +72,14 @@ const initialGallery = [
 const emptyImage = {
   title: "",
   category: "Beach",
-  image: "/rest-bg.png",
+  image: "/resort-bg.png",
   status: "Active",
   description: "",
 };
 
 export default function GalleryManagement() {
+  const navigate = useNavigate();
+
   const [gallery, setGallery] = useState(initialGallery);
   const [filter, setFilter] = useState("All");
   const [search, setSearch] = useState("");
@@ -168,7 +170,76 @@ export default function GalleryManagement() {
 
   return (
     <div style={styles.page}>
-      <AdminSidebar />
+      <aside style={styles.sidebar}>
+        <div style={styles.logoArea}>
+          <div style={styles.logoIcon}>P</div>
+          <div>
+            <h2 style={styles.logo}>PARADISE</h2>
+            <span style={styles.logoSub}>RESORT ADMIN</span>
+          </div>
+        </div>
+
+        <div style={styles.menuLabel}>MAIN MENU</div>
+
+        <NavButton
+          icon="▦"
+          label="Dashboard"
+          onClick={() => navigate("/admin/dashboard")}
+        />
+
+        <NavButton
+          icon="▣"
+          label="Bookings"
+          onClick={() => navigate("/admin/bookings")}
+        />
+
+        <NavButton
+          icon="▤"
+          label="Rooms"
+          onClick={() => navigate("/admin/rooms")}
+        />
+
+        <NavButton
+          icon="🍽"
+          label="Dining"
+          onClick={() => navigate("/admin/dining")}
+        />
+
+        <NavButton
+          icon="✦"
+          label="Experiences"
+          onClick={() => navigate("/admin/experiences")}
+        />
+
+        <NavButton
+          icon="◇"
+          label="Offers"
+          onClick={() => navigate("/admin/offers")}
+        />
+
+        <NavButton
+          icon="▧"
+          label="Gallery"
+          active
+          onClick={() => navigate("/admin/gallery")}
+        />
+
+        <NavButton
+          icon="⚙"
+          label="Settings"
+          onClick={() => navigate("/admin/settings")}
+        />
+
+        <div style={styles.sidebarBottom}>
+          <button
+            style={styles.logoutButton}
+            onClick={() => navigate("/admin")}
+          >
+            <span>↪</span>
+            Logout
+          </button>
+        </div>
+      </aside>
 
       <main style={styles.main}>
         <header style={styles.header}>
@@ -704,6 +775,19 @@ const styles = {
       "radial-gradient(circle at top right, rgba(26, 77, 82, 0.18), transparent 30%), #07151a",
     color: "#f5f0e8",
     display: "flex",
+  },
+
+  sidebar: {
+    width: 250,
+    minHeight: "100vh",
+    position: "fixed",
+    left: 0,
+    top: 0,
+    bottom: 0,
+    padding: "28px 18px",
+    background: "rgba(5, 18, 23, 0.97)",
+    borderRight: "1px solid rgba(255,255,255,0.07)",
+    zIndex: 10,
   },
 
   logoArea: {

@@ -10,6 +10,7 @@ export default function RoomsManagement() {
       price: 8500,
       guests: 2,
       status: "Available",
+      image: "/resort-suites.jpg",
     },
     {
       id: "RM002",
@@ -18,6 +19,7 @@ export default function RoomsManagement() {
       price: 12000,
       guests: 3,
       status: "Occupied",
+      image: "/resort-villas.jpg",
     },
     {
       id: "RM003",
@@ -26,6 +28,7 @@ export default function RoomsManagement() {
       price: 22000,
       guests: 4,
       status: "Available",
+      image: "/resort-presidential.jpg",
     },
     {
       id: "RM004",
@@ -34,6 +37,7 @@ export default function RoomsManagement() {
       price: 6000,
       guests: 2,
       status: "Cleaning",
+      image: "/resort-gardens.jpg",
     },
     {
       id: "RM005",
@@ -42,6 +46,7 @@ export default function RoomsManagement() {
       price: 7500,
       guests: 2,
       status: "Available",
+      image: "/resort-premium.jpg",
     },
     {
       id: "RM006",
@@ -50,6 +55,7 @@ export default function RoomsManagement() {
       price: 18000,
       guests: 4,
       status: "Maintenance",
+      image: "/resort-royal-villa.jpg",
     },
   ]);
 
@@ -136,82 +142,6 @@ export default function RoomsManagement() {
 
   return (
     <div className="rooms-management">
-
-      {/* ================= SIDEBAR ================= */}
-
-      <aside className="rooms-sidebar">
-
-        <div className="rooms-logo">
-          <span>PARADISE</span>
-          <strong>RESORT</strong>
-        </div>
-
-        <nav className="rooms-nav">
-
-          <button
-            onClick={() => {
-              window.location.href =
-                "/admin/dashboard";
-            }}
-          >
-            <span>⌂</span>
-            Dashboard
-          </button>
-
-          <button
-            onClick={() => {
-              window.location.href =
-                "/admin/bookings";
-            }}
-          >
-            <span>▣</span>
-            Bookings
-          </button>
-
-          <button className="active">
-            <span>▤</span>
-            Rooms
-          </button>
-
-          <button>
-            <span>♨</span>
-            Dining
-          </button>
-
-          <button>
-            <span>✦</span>
-            Experiences
-          </button>
-
-          <button>
-            <span>◫</span>
-            Offers
-          </button>
-
-          <button>
-            <span>◉</span>
-            Gallery
-          </button>
-
-          <button>
-            <span>⚙</span>
-            Settings
-          </button>
-
-        </nav>
-
-        <button
-          className="logout-button"
-          onClick={() => {
-            window.location.href = "/admin";
-          }}
-        >
-          <span>↪</span>
-          Logout
-        </button>
-
-      </aside>
-
 
       {/* ================= MAIN ================= */}
 
@@ -383,12 +313,11 @@ export default function RoomsManagement() {
 
                   </div>
 
-                  <div className="room-image-placeholder">
-                    <span>PARADISE</span>
-                    <small>
-                      {room.type.toUpperCase()}
-                    </small>
-                  </div>
+                  <img
+                    src={room.image}
+                    alt={room.name}
+                    className="room-card-image"
+                  />
 
                 </div>
 
@@ -542,9 +471,11 @@ export default function RoomsManagement() {
               </button>
 
               <div className="modal-room-image">
-                <span>
-                  PARADISE RESORT
-                </span>
+                <img
+                  src={selectedRoom.image}
+                  alt={selectedRoom.name}
+                  className="modal-room-image-photo"
+                />
               </div>
 
               <div className="modal-content">
@@ -817,6 +748,7 @@ export default function RoomsManagement() {
 
         .rooms-management {
           min-height: 100vh;
+          width: 100%;
           display: flex;
           background:
             radial-gradient(
@@ -833,90 +765,15 @@ export default function RoomsManagement() {
         }
 
 
-        /* SIDEBAR */
-
-        .rooms-sidebar {
-          width: 250px;
-          min-height: 100vh;
-          position: fixed;
-          left: 0;
-          top: 0;
-          display: flex;
-          flex-direction: column;
-          padding: 35px 20px;
-          border-right:
-            1px solid rgba(255,255,255,0.08);
-          background:
-            rgba(4,15,17,0.94);
-          z-index: 20;
-        }
-
-        .rooms-logo {
-          text-align: center;
-          margin-bottom: 50px;
-          letter-spacing: 3px;
-        }
-
-        .rooms-logo span {
-          display: block;
-          color: #d6b46a;
-          font-size: 13px;
-        }
-
-        .rooms-logo strong {
-          display: block;
-          font-size: 9px;
-          letter-spacing: 5px;
-          margin-top: 5px;
-        }
-
-        .rooms-nav {
-          display: flex;
-          flex-direction: column;
-          gap: 7px;
-        }
-
-        .rooms-nav button,
-        .logout-button {
-          border: none;
-          background: transparent;
-          color: #829294;
-          padding: 13px 15px;
-          display: flex;
-          align-items: center;
-          gap: 14px;
-          cursor: pointer;
-          text-align: left;
-          font-size: 13px;
-          transition: 0.25s ease;
-        }
-
-        .rooms-nav button span,
-        .logout-button span {
-          width: 20px;
-          text-align: center;
-        }
-
-        .rooms-nav button:hover,
-        .rooms-nav button.active {
-          background:
-            rgba(214,180,106,0.1);
-          color: #d6b46a;
-        }
-
-        .logout-button {
-          margin-top: auto;
-          border-top:
-            1px solid rgba(255,255,255,0.08);
-          padding-top: 22px;
-        }
-
+        /* SHARED ADMIN SIDEBAR
+           Navigation is provided by AdminSidebar.jsx.
+           RoomsManagement intentionally has no second sidebar. */
 
         /* MAIN */
 
         .rooms-main {
-          width: calc(100% - 250px);
-          margin-left: 250px;
+          width: 100%;
+          margin-left: 0;
           padding: 40px;
         }
 
@@ -1103,25 +960,17 @@ export default function RoomsManagement() {
             );
         }
 
-        .room-image-placeholder {
+        .room-card-image {
           width: 100%;
           height: 100%;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          justify-content: center;
-          color:
-            rgba(214,180,106,0.5);
-          letter-spacing: 4px;
-          font-size: 13px;
+          display: block;
+          object-fit: cover;
+          object-position: center;
+          transition: transform 0.5s ease;
         }
 
-        .room-image-placeholder small {
-          margin-top: 8px;
-          color:
-            rgba(255,255,255,0.3);
-          font-size: 8px;
-          letter-spacing: 3px;
+        .room-card:hover .room-card-image {
+          transform: scale(1.04);
         }
 
         .room-image-overlay {
@@ -1324,19 +1173,16 @@ export default function RoomsManagement() {
 
         .modal-room-image {
           height: 230px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          background:
-            linear-gradient(
-              135deg,
-              #17464c,
-              #071719
-            );
-          color:
-            rgba(214,180,106,0.55);
-          font-size: 13px;
-          letter-spacing: 4px;
+          overflow: hidden;
+          background: #071719;
+        }
+
+        .modal-room-image-photo {
+          width: 100%;
+          height: 100%;
+          display: block;
+          object-fit: cover;
+          object-position: center;
         }
 
         .modal-content {
@@ -1471,13 +1317,9 @@ export default function RoomsManagement() {
 
         @media (max-width: 1100px) {
 
-          .rooms-sidebar {
-            width: 210px;
-          }
-
           .rooms-main {
-            width: calc(100% - 210px);
-            margin-left: 210px;
+            width: 100%;
+            margin-left: 0;
             padding: 25px;
           }
 
@@ -1499,27 +1341,6 @@ export default function RoomsManagement() {
 
           .rooms-management {
             display: block;
-          }
-
-          .rooms-sidebar {
-            position: relative;
-            width: 100%;
-            min-height: auto;
-            padding: 20px;
-          }
-
-          .rooms-logo {
-            margin-bottom: 20px;
-          }
-
-          .rooms-nav {
-            display: grid;
-            grid-template-columns:
-              repeat(2, 1fr);
-          }
-
-          .logout-button {
-            margin-top: 15px;
           }
 
           .rooms-main {
@@ -1567,10 +1388,6 @@ export default function RoomsManagement() {
 
           .rooms-main {
             padding: 15px;
-          }
-
-          .rooms-nav {
-            grid-template-columns: 1fr;
           }
 
           .rooms-stats {

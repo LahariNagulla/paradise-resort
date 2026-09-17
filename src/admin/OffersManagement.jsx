@@ -13,6 +13,7 @@ const initialOffers = [
     status: "Active",
     description:
       "A romantic luxury escape with a private beach dinner, couple spa session and premium accommodation.",
+    image: "/resort-royal-villa.jpg",
   },
   {
     id: "OF002",
@@ -24,6 +25,7 @@ const initialOffers = [
     status: "Active",
     description:
       "A relaxing weekend stay with breakfast, pool access and a complimentary sunset experience.",
+    image: "/resort-suites.jpg",
   },
   {
     id: "OF003",
@@ -35,6 +37,7 @@ const initialOffers = [
     status: "Active",
     description:
       "A family-friendly resort package including spacious accommodation, meals and selected activities.",
+    image: "/resort-gardens.jpg",
   },
   {
     id: "OF004",
@@ -46,6 +49,7 @@ const initialOffers = [
     status: "Inactive",
     description:
       "Save more by planning your luxury beach holiday in advance with an exclusive early booking offer.",
+    image: "/resort-presidential.jpg",
   },
   {
     id: "OF005",
@@ -57,6 +61,7 @@ const initialOffers = [
     status: "Active",
     description:
       "Enjoy an extended tropical retreat with special accommodation rates and selected resort benefits.",
+    image: "/resort-villas.jpg",
   },
 ];
 
@@ -78,6 +83,7 @@ export default function OffersManagement() {
     validity: "",
     status: "Active",
     description: "",
+    image: "/resort-beach-restaurant.jpg",
   };
 
   const [newOffer, setNewOffer] = useState(emptyOffer);
@@ -189,11 +195,21 @@ export default function OffersManagement() {
         </div>
       </aside>
 
-      <main style={styles.main}>
+      <main style={styles.main} className="offers-main">
+        <div className="offers-mobile-nav">
+          <button onClick={() => navigate("/admin/dashboard")}>Dashboard</button>
+          <button onClick={() => navigate("/admin/bookings")}>Bookings</button>
+          <button onClick={() => navigate("/admin/rooms")}>Rooms</button>
+          <button onClick={() => navigate("/admin/dining")}>Dining</button>
+          <button onClick={() => navigate("/admin/experiences")}>Experiences</button>
+          <button className="active" onClick={() => navigate("/admin/offers")}>Offers</button>
+          <button onClick={() => navigate("/admin/gallery")}>Gallery</button>
+          <button onClick={() => navigate("/admin/settings")}>Settings</button>
+        </div>
         <header style={styles.header}>
           <div>
             <div style={styles.breadcrumb}>ADMIN / OFFERS</div>
-            <h1 style={styles.title}>Offers Management</h1>
+            <h1 style={styles.title} className="offers-title">Offers Management</h1>
             <p style={styles.subtitle}>
               Manage resort packages, discounts and special offers.
             </p>
@@ -201,6 +217,7 @@ export default function OffersManagement() {
 
           <button
             style={styles.addButton}
+            className="offers-add-button"
             onClick={() => setShowAddModal(true)}
           >
             <span>＋</span>
@@ -208,7 +225,7 @@ export default function OffersManagement() {
           </button>
         </header>
 
-        <section style={styles.statsGrid}>
+        <section style={styles.statsGrid} className="offers-stats">
           <StatCard label="Total Offers" value={total} icon="◇" />
           <StatCard label="Active Offers" value={active} icon="✓" />
           <StatCard label="Inactive Offers" value={inactive} icon="◷" />
@@ -229,12 +246,13 @@ export default function OffersManagement() {
           />
         </section>
 
-        <section style={styles.toolbar}>
-          <div style={styles.filters}>
+        <section style={styles.toolbar} className="offers-toolbar">
+          <div style={styles.filters} className="offers-filters">
             {["All", "Active", "Inactive"].map((item) => (
               <button
                 key={item}
                 onClick={() => setFilter(item)}
+                className="offers-filter-button"
                 style={{
                   ...styles.filterButton,
                   ...(filter === item ? styles.activeFilter : {}),
@@ -251,10 +269,11 @@ export default function OffersManagement() {
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             style={styles.search}
+            className="offers-search"
           />
         </section>
 
-        <section style={styles.grid}>
+        <section style={styles.grid} className="offers-grid">
           <AnimatePresence>
             {filteredOffers.map((offer, index) => (
               <motion.div
@@ -266,10 +285,14 @@ export default function OffersManagement() {
                 whileHover={{ y: -5 }}
                 style={styles.card}
               >
-                <div style={styles.cardImage}>
+                <div style={styles.cardImage} className="offers-card-image">
+                  <img
+                    src={offer.image || "/resort-presidential.jpg"}
+                    alt={offer.title}
+                    style={styles.cardImagePhoto}
+                  />
+                  <div style={styles.imageShade}></div>
                   <div style={styles.offerBadge}>{offer.discount} OFF</div>
-
-                  <span style={styles.imageText}>PARADISE</span>
 
                   <span
                     style={{
@@ -283,14 +306,14 @@ export default function OffersManagement() {
                   </span>
                 </div>
 
-                <div style={styles.cardContent}>
-                  <div style={styles.cardTop}>
+                <div style={styles.cardContent} className="offers-card-content">
+                  <div style={styles.cardTop} className="offers-card-top">
                     <div>
-                      <h2 style={styles.cardTitle}>{offer.title}</h2>
+                      <h2 style={styles.cardTitle} className="offers-card-title">{offer.title}</h2>
                       <p style={styles.cardType}>{offer.type}</p>
                     </div>
 
-                    <strong style={styles.price}>
+                    <strong style={styles.price} className="offers-price">
                       ₹{Number(offer.price).toLocaleString("en-IN")}
                     </strong>
                   </div>
@@ -299,7 +322,7 @@ export default function OffersManagement() {
 
                   <p style={styles.description}>{offer.description}</p>
 
-                  <div style={styles.actions}>
+                  <div style={styles.actions} className="offers-actions">
                     <button
                       style={styles.viewButton}
                       onClick={() => setSelectedOffer(offer)}
@@ -375,14 +398,19 @@ export default function OffersManagement() {
             onClick={() => setSelectedOffer(null)}
           >
             <motion.div
-              style={styles.detailsModal}
+              style={styles.detailsModal} className="offers-details-modal"
               initial={{ opacity: 0, scale: 0.95, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95 }}
               onClick={(e) => e.stopPropagation()}
             >
-              <div style={styles.detailsImage}>
-                <span style={styles.imageText}>PARADISE</span>
+              <div style={styles.detailsImage} className="offers-details-image">
+                <img
+                  src={selectedOffer.image || "/resort-presidential.jpg"}
+                  alt={selectedOffer.title}
+                  style={styles.detailsImagePhoto}
+                />
+                <div style={styles.imageShade}></div>
 
                 <button
                   style={styles.modalCloseFloating}
@@ -396,10 +424,10 @@ export default function OffersManagement() {
                 </div>
               </div>
 
-              <div style={styles.detailsContent}>
+              <div style={styles.detailsContent} className="offers-details-content">
                 <span style={styles.modalEyebrow}>{selectedOffer.id}</span>
 
-                <h2 style={styles.detailsTitle}>{selectedOffer.title}</h2>
+                <h2 style={styles.detailsTitle} className="offers-details-title">{selectedOffer.title}</h2>
 
                 <p style={styles.detailsType}>{selectedOffer.type}</p>
 
@@ -448,6 +476,10 @@ export default function OffersManagement() {
           cursor: pointer;
         }
 
+        .offers-mobile-nav {
+          display: none;
+        }
+
         @media (max-width: 1100px) {
           .offers-grid {
             grid-template-columns: 1fr !important;
@@ -459,6 +491,32 @@ export default function OffersManagement() {
         }
 
         @media (max-width: 900px) {
+          .offers-mobile-nav {
+            display: flex;
+            gap: 8px;
+            overflow-x: auto;
+            padding: 10px 0 16px;
+            margin-bottom: 8px;
+            scrollbar-width: thin;
+          }
+
+          .offers-mobile-nav button {
+            flex: 0 0 auto;
+            border: 1px solid rgba(255,255,255,0.08);
+            background: rgba(255,255,255,0.025);
+            color: #8f9da0;
+            padding: 9px 12px;
+            border-radius: 8px;
+            font-size: 11px;
+          }
+
+          .offers-mobile-nav button.active {
+            background: #c9a86a;
+            color: #07151a;
+            border-color: #c9a86a;
+            font-weight: 700;
+          }
+
           .offers-sidebar {
             display: none !important;
           }
@@ -485,20 +543,131 @@ export default function OffersManagement() {
         }
 
         @media (max-width: 600px) {
-          .offers-stats {
-            grid-template-columns: 1fr !important;
+          .offers-main {
+            padding: 22px 14px !important;
           }
 
-          .offers-form-grid {
+          .offers-header {
+            gap: 16px !important;
+            margin-bottom: 24px !important;
+          }
+
+          .offers-title {
+            font-size: 28px !important;
+          }
+
+          .offers-add-button {
+            width: 100% !important;
+            justify-content: center !important;
+            min-height: 46px !important;
+          }
+
+          .offers-stats {
             grid-template-columns: 1fr !important;
+            gap: 10px !important;
+          }
+
+          .offers-toolbar {
+            gap: 12px !important;
+          }
+
+          .offers-filters {
+            width: 100% !important;
+          }
+
+          .offers-filter-button {
+            flex: 1 !important;
+            min-width: 0 !important;
+          }
+
+          .offers-search {
+            width: 100% !important;
+            min-height: 44px !important;
+          }
+
+          .offers-grid {
+            grid-template-columns: 1fr !important;
+            gap: 14px !important;
+          }
+
+          .offers-card-image {
+            height: 180px !important;
+          }
+
+          .offers-card-content {
+            padding: 16px !important;
+          }
+
+          .offers-card-top {
+            flex-direction: column !important;
+            gap: 8px !important;
+          }
+
+          .offers-card-title {
+            font-size: 19px !important;
+          }
+
+          .offers-price {
+            font-size: 14px !important;
+          }
+
+          .offers-actions {
+            display: grid !important;
+            grid-template-columns: 1fr 1fr !important;
+          }
+
+          .offers-actions button {
+            min-height: 42px !important;
           }
 
           .offers-modal {
+            padding: 18px !important;
+            border-radius: 12px !important;
+            max-height: 94vh !important;
+          }
+
+          .offers-modal-header {
+            margin-bottom: 18px !important;
+          }
+
+          .offers-modal-title {
+            font-size: 23px !important;
+          }
+
+          .offers-details-modal {
+            max-height: 94vh !important;
+          }
+
+          .offers-details-image {
+            height: 190px !important;
+          }
+
+          .offers-details-content {
             padding: 20px !important;
+          }
+
+          .offers-details-title {
+            font-size: 25px !important;
           }
 
           .offers-details-grid {
             grid-template-columns: 1fr !important;
+            margin: 18px 0 !important;
+          }
+
+          .offers-modal-actions {
+            flex-direction: column-reverse !important;
+          }
+
+          .offers-modal-actions button {
+            width: 100% !important;
+            min-height: 44px !important;
+          }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          * {
+            scroll-behavior: auto !important;
           }
         }
       `}</style>
@@ -561,10 +730,10 @@ function OfferModal({
         exit={{ opacity: 0, scale: 0.95 }}
         onClick={(e) => e.stopPropagation()}
       >
-        <div style={styles.modalHeader}>
+        <div style={styles.modalHeader} className="offers-modal-header">
           <div>
             <span style={styles.modalEyebrow}>PARADISE RESORT</span>
-            <h2 style={styles.modalTitle}>{title}</h2>
+            <h2 style={styles.modalTitle} className="offers-modal-title">{title}</h2>
           </div>
 
           <button style={styles.closeButton} onClick={onClose}>
@@ -639,6 +808,17 @@ function OfferModal({
           </div>
 
           <div style={styles.field}>
+            <label style={styles.label}>Image Path</label>
+            <input
+              type="text"
+              value={offer.image || ""}
+              onChange={(e) => setOffer({ ...offer, image: e.target.value })}
+              placeholder="e.g. /resort-royal-villa.jpg"
+              style={styles.input}
+            />
+          </div>
+
+          <div style={styles.field}>
             <label style={styles.label}>Description</label>
             <textarea
               value={offer.description}
@@ -655,7 +835,7 @@ function OfferModal({
             />
           </div>
 
-          <div style={styles.modalActions}>
+          <div style={styles.modalActions} className="offers-modal-actions">
             <button type="button" style={styles.cancelButton} onClick={onClose}>
               Cancel
             </button>
@@ -940,30 +1120,43 @@ const styles = {
   },
 
   cardImage: {
-    height: 160,
-    background:
-      "linear-gradient(135deg, #123a40, #0b2027 55%, #142e31)",
+    height: 190,
+    background: "#0b2027",
     position: "relative",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
+    overflow: "hidden",
+  },
+
+  cardImagePhoto: {
+    width: "100%",
+    height: "100%",
+    display: "block",
+    objectFit: "cover",
+    objectPosition: "center",
   },
 
   detailsImage: {
-    height: 210,
-    background:
-      "linear-gradient(135deg, #123a40, #0b2027 55%, #142e31)",
+    height: 250,
+    background: "#0b2027",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
     position: "relative",
+    overflow: "hidden",
   },
 
-  imageText: {
-    fontFamily: "Georgia, serif",
-    fontSize: 24,
-    letterSpacing: 6,
-    color: "rgba(255,255,255,0.14)",
+  detailsImagePhoto: {
+    width: "100%",
+    height: "100%",
+    display: "block",
+    objectFit: "cover",
+    objectPosition: "center",
+  },
+
+  imageShade: {
+    position: "absolute",
+    inset: 0,
+    background: "linear-gradient(to bottom, rgba(0,0,0,0.12), rgba(0,0,0,0.48))",
+    pointerEvents: "none",
   },
 
   offerBadge: {

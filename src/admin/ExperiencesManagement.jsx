@@ -6,6 +6,7 @@ const initialExperiences = [
   {
     id: "EX001",
     name: "Sunset Cruise",
+    image: "/resort-cruise.jpg",
     category: "Water Experience",
     duration: "2 Hours",
     price: 3500,
@@ -17,6 +18,7 @@ const initialExperiences = [
   {
     id: "EX002",
     name: "Ocean Kayaking",
+    image: "/resort-beach.jpg",
     category: "Water Sports",
     duration: "1 Hour",
     price: 1800,
@@ -28,6 +30,7 @@ const initialExperiences = [
   {
     id: "EX003",
     name: "Beach Yoga",
+    image: "/resort-garden.jpg",
     category: "Wellness",
     duration: "1 Hour",
     price: 1200,
@@ -39,6 +42,7 @@ const initialExperiences = [
   {
     id: "EX004",
     name: "Private Beach Dinner",
+    image: "/resort-dinner.jpg",
     category: "Dining Experience",
     duration: "3 Hours",
     price: 8500,
@@ -50,6 +54,7 @@ const initialExperiences = [
   {
     id: "EX005",
     name: "Island Adventure",
+    image: "/resort-villa.jpg",
     category: "Adventure",
     duration: "5 Hours",
     price: 6500,
@@ -61,6 +66,7 @@ const initialExperiences = [
   {
     id: "EX006",
     name: "Couples Spa Retreat",
+    image: "/resort-pool.jpg",
     category: "Wellness",
     duration: "2 Hours",
     price: 5500,
@@ -83,6 +89,7 @@ export default function ExperiencesManagement() {
   const [showAddModal, setShowAddModal] = useState(false);
   const [newExperience, setNewExperience] = useState({
     name: "",
+    image: "/resort-cruise.jpg",
     category: "Water Experience",
     duration: "",
     price: "",
@@ -268,7 +275,7 @@ export default function ExperiencesManagement() {
       <main style={styles.main}>
         {/* HEADER */}
 
-        <header style={styles.header}>
+        <header style={styles.header} className="experience-header">
           <div>
             <div style={styles.breadcrumb}>
               ADMIN / EXPERIENCES
@@ -295,7 +302,7 @@ export default function ExperiencesManagement() {
 
         {/* ================= STATS ================= */}
 
-        <section style={styles.statsGrid}>
+        <section style={styles.statsGrid} className="experience-stats">
           <StatCard
             label="Total Experiences"
             value={total}
@@ -323,7 +330,7 @@ export default function ExperiencesManagement() {
 
         {/* ================= TOOLBAR ================= */}
 
-        <section style={styles.toolbar}>
+        <section style={styles.toolbar} className="experience-toolbar">
           <div style={styles.filters}>
             {["All", "Active", "Inactive"].map(
               (item) => (
@@ -351,12 +358,13 @@ export default function ExperiencesManagement() {
               setSearch(e.target.value)
             }
             style={styles.search}
+            className="experience-search"
           />
         </section>
 
         {/* ================= EXPERIENCE CARDS ================= */}
 
-        <section style={styles.grid}>
+        <section style={styles.grid} className="experience-grid">
           <AnimatePresence>
             {filteredExperiences.map(
               (item, index) => (
@@ -386,9 +394,11 @@ export default function ExperiencesManagement() {
                   {/* IMAGE AREA */}
 
                   <div style={styles.cardImage}>
-                    <span style={styles.imageText}>
-                      PARADISE
-                    </span>
+                    <img
+                      src={item.image || "/resort-cruise.jpg"}
+                      alt={item.name}
+                      style={styles.cardImagePhoto}
+                    />
 
                     <div
                       style={
@@ -472,6 +482,7 @@ export default function ExperiencesManagement() {
 
                     <div
                       style={styles.actions}
+                      className="experience-actions"
                     >
                       <button
                         style={
@@ -531,6 +542,7 @@ export default function ExperiencesManagement() {
           >
             <motion.div
               style={styles.modal}
+              className="experience-modal"
               initial={{
                 opacity: 0,
                 scale: 0.95,
@@ -652,6 +664,24 @@ export default function ExperiencesManagement() {
                       <option>
                         Cultural Experience
                       </option>
+                    </select>
+                  </div>
+
+                  <div style={styles.field}>
+                    <label style={styles.label}>Experience Image</label>
+                    <select
+                      value={newExperience.image || "/resort-cruise.jpg"}
+                      onChange={(e) =>
+                        setNewExperience({ ...newExperience, image: e.target.value })
+                      }
+                      style={styles.input}
+                    >
+                      <option value="/resort-cruise.jpg">Sunset Cruise</option>
+                      <option value="/resort-beach.jpg">Ocean / Beach</option>
+                      <option value="/resort-garden.jpg">Garden / Yoga</option>
+                      <option value="/resort-dinner.jpg">Private Dinner</option>
+                      <option value="/resort-villa.jpg">Villa / Adventure</option>
+                      <option value="/resort-pool.jpg">Pool / Spa</option>
                     </select>
                   </div>
 
@@ -836,9 +866,14 @@ export default function ExperiencesManagement() {
         }
 
         @media (max-width: 700px) {
-          .experience-grid {
-            grid-template-columns: 1fr;
-          }
+          .experience-grid { grid-template-columns: 1fr; }
+          .experience-header, .experience-toolbar { flex-direction: column !important; align-items: stretch !important; }
+          .experience-search { width: 100% !important; }
+          .experience-stats { grid-template-columns: 1fr !important; }
+          .experience-form-grid { grid-template-columns: 1fr !important; }
+          .experience-modal { padding: 20px !important; max-height: 92vh !important; }
+          .experience-actions { flex-direction: column !important; }
+          .experience-actions button { width: 100% !important; }
         }
       `}</style>
     </div>
@@ -1168,6 +1203,13 @@ const styles = {
     justifyContent: "center",
   },
 
+
+  cardImagePhoto: {
+    width: "100%",
+    height: "100%",
+    objectFit: "cover",
+    display: "block",
+  },
 
   imageText: {
     fontFamily: "Georgia, serif",
