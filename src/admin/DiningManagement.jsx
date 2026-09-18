@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { useNavigate } from "react-router-dom";
+import AdminSidebar from "./AdminSidebar";
 
 const initialDining = [
   {
@@ -58,8 +58,6 @@ const initialDining = [
 ];
 
 export default function DiningManagement() {
-  const navigate = useNavigate();
-
   const [dining, setDining] = useState(initialDining);
   const [filter, setFilter] = useState("All");
   const [search, setSearch] = useState("");
@@ -150,99 +148,7 @@ export default function DiningManagement() {
 
   return (
     <div style={styles.page}>
-      {/* SIDEBAR */}
-      <aside style={styles.sidebar}>
-        <div style={styles.logoArea}>
-          <div style={styles.logoIcon}>P</div>
-
-          <div>
-            <h2 style={styles.logo}>PARADISE</h2>
-            <span style={styles.logoSub}>RESORT ADMIN</span>
-          </div>
-        </div>
-
-        <div style={styles.menuLabel}>MAIN MENU</div>
-
-        <button
-          style={styles.menuButton}
-          onClick={() => navigate("/admin/dashboard")}
-        >
-          <span>▦</span>
-          Dashboard
-        </button>
-
-        <button
-          style={styles.menuButton}
-          onClick={() => navigate("/admin/bookings")}
-        >
-          <span>▣</span>
-          Bookings
-        </button>
-
-        <button
-          style={styles.menuButton}
-          onClick={() => navigate("/admin/rooms")}
-        >
-          <span>▤</span>
-          Rooms
-        </button>
-
-        <button
-          style={{
-            ...styles.menuButton,
-            ...styles.activeMenu,
-          }}
-          onClick={() => navigate("/admin/dining")}
-        >
-          <span>🍽</span>
-          Dining
-        </button>
-
-        <button
-          style={styles.menuButton}
-          onClick={() => navigate("/admin/experiences")}
-        >
-          <span>✦</span>
-          Experiences
-        </button>
-
-        <button
-          type="button"
-          style={styles.menuButton}
-          onClick={() => navigate("/admin/offers")}
-        >
-          <span>◇</span>
-          Offers
-        </button>
-
-        <button
-          type="button"
-          style={styles.menuButton}
-          onClick={() => navigate("/admin/gallery")}
-        >
-          <span>▧</span>
-          Gallery
-        </button>
-
-        <button
-          type="button"
-          style={styles.menuButton}
-          onClick={() => navigate("/admin/settings")}
-        >
-          <span>⚙</span>
-          Settings
-        </button>
-
-        <div style={styles.sidebarBottom}>
-          <button
-            style={styles.logoutButton}
-            onClick={() => navigate("/admin")}
-          >
-            <span>↪</span>
-            Logout
-          </button>
-        </div>
-      </aside>
+      <AdminSidebar />
 
       {/* MAIN */}
       <main className="dining-main" style={styles.main}>
@@ -657,7 +563,7 @@ export default function DiningManagement() {
           cursor: pointer;
         }
 
-        @media (max-width: 900px) {
+        @media (max-width: 700px) {
           .dining-sidebar {
             display: none;
           }

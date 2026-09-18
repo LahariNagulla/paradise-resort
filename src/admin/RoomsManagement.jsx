@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
+import AdminSidebar from "./AdminSidebar";
 
 export default function RoomsManagement() {
   const [rooms, setRooms] = useState([
@@ -142,6 +143,8 @@ export default function RoomsManagement() {
 
   return (
     <div className="rooms-management">
+
+      <AdminSidebar />
 
       {/* ================= MAIN ================= */}
 
@@ -772,8 +775,8 @@ export default function RoomsManagement() {
         /* MAIN */
 
         .rooms-main {
-          width: 100%;
-          margin-left: 0;
+          width: calc(100% - 250px);
+          margin-left: 250px;
           padding: 40px;
         }
 
@@ -1315,11 +1318,11 @@ export default function RoomsManagement() {
 
         /* TABLET */
 
-        @media (max-width: 1100px) {
+        @media (max-width: 1100px) and (min-width: 701px) {
 
           .rooms-main {
-            width: 100%;
-            margin-left: 0;
+            width: calc(100% - 250px);
+            margin-left: 250px;
             padding: 25px;
           }
 

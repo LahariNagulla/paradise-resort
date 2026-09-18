@@ -457,31 +457,6 @@ export default function AdminSidebar() {
         }
 
         /* =====================================
-           TABLET
-        ===================================== */
-
-        @media (max-width: 1050px) {
-
-          .admin-sidebar {
-            width: 220px;
-
-            padding:
-              30px 16px;
-          }
-
-          .admin-logo {
-            margin-bottom: 40px;
-          }
-
-          .admin-side-link {
-            font-size: 13px;
-
-            padding:
-              11px 12px;
-          }
-        }
-
-        /* =====================================
            MOBILE
         ===================================== */
 

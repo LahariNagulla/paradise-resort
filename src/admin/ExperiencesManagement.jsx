@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { useNavigate } from "react-router-dom";
+import AdminSidebar from "./AdminSidebar";
 
 const initialExperiences = [
   {
@@ -78,8 +78,6 @@ const initialExperiences = [
 ];
 
 export default function ExperiencesManagement() {
-  const navigate = useNavigate();
-
   const [experiences, setExperiences] = useState(
     initialExperiences
   );
@@ -186,89 +184,7 @@ export default function ExperiencesManagement() {
 
   return (
     <div style={styles.page}>
-      {/* ================= SIDEBAR ================= */}
-
-      <aside style={styles.sidebar} className="experience-sidebar">
-        <div style={styles.logoArea}>
-          <div style={styles.logoIcon}>P</div>
-
-          <div>
-            <h2 style={styles.logo}>PARADISE</h2>
-            <span style={styles.logoSub}>
-              RESORT ADMIN
-            </span>
-          </div>
-        </div>
-
-        <div style={styles.menuLabel}>MAIN MENU</div>
-
-        <button
-          style={styles.menuButton}
-          onClick={() => navigate("/admin/dashboard")}
-        >
-          <span>▦</span>
-          Dashboard
-        </button>
-
-        <button
-          style={styles.menuButton}
-          onClick={() => navigate("/admin/bookings")}
-        >
-          <span>▣</span>
-          Bookings
-        </button>
-
-        <button
-          style={styles.menuButton}
-          onClick={() => navigate("/admin/rooms")}
-        >
-          <span>▤</span>
-          Rooms
-        </button>
-
-        <button
-          style={styles.menuButton}
-          onClick={() => navigate("/admin/dining")}
-        >
-          <span>🍽</span>
-          Dining
-        </button>
-
-        <button
-          style={{
-            ...styles.menuButton,
-            ...styles.activeMenu,
-          }}
-        >
-          <span>✦</span>
-          Experiences
-        </button>
-
-        <button style={styles.menuButton} onClick={() => navigate("/admin/offers")}>
-          <span>◇</span>
-          Offers
-        </button>
-
-        <button style={styles.menuButton} onClick={() => navigate("/admin/gallery")}>
-          <span>▧</span>
-          Gallery
-        </button>
-
-        <button style={styles.menuButton} onClick={() => navigate("/admin/settings")}>
-          <span>⚙</span>
-          Settings
-        </button>
-
-        <div style={styles.sidebarBottom}>
-          <button
-            style={styles.logoutButton}
-            onClick={() => navigate("/admin")}
-          >
-            <span>↪</span>
-            Logout
-          </button>
-        </div>
-      </aside>
+      <AdminSidebar />
 
       {/* ================= MAIN ================= */}
 
@@ -859,7 +775,7 @@ export default function ExperiencesManagement() {
           }
         }
 
-        @media (max-width: 900px) {
+        @media (max-width: 700px) {
           .experience-sidebar {
             display: none !important;
           }

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { useNavigate } from "react-router-dom";
+import AdminSidebar from "./AdminSidebar";
 const initialGallery = [
   {
     id: "GL001",
@@ -78,8 +78,6 @@ const emptyImage = {
 };
 
 export default function GalleryManagement() {
-  const navigate = useNavigate();
-
   const [gallery, setGallery] = useState(initialGallery);
   const [filter, setFilter] = useState("All");
   const [search, setSearch] = useState("");
@@ -170,76 +168,7 @@ export default function GalleryManagement() {
 
   return (
     <div style={styles.page}>
-      <aside style={styles.sidebar} className="gallery-sidebar">
-        <div style={styles.logoArea}>
-          <div style={styles.logoIcon}>P</div>
-          <div>
-            <h2 style={styles.logo}>PARADISE</h2>
-            <span style={styles.logoSub}>RESORT ADMIN</span>
-          </div>
-        </div>
-
-        <div style={styles.menuLabel}>MAIN MENU</div>
-
-        <NavButton
-          icon="▦"
-          label="Dashboard"
-          onClick={() => navigate("/admin/dashboard")}
-        />
-
-        <NavButton
-          icon="▣"
-          label="Bookings"
-          onClick={() => navigate("/admin/bookings")}
-        />
-
-        <NavButton
-          icon="▤"
-          label="Rooms"
-          onClick={() => navigate("/admin/rooms")}
-        />
-
-        <NavButton
-          icon="🍽"
-          label="Dining"
-          onClick={() => navigate("/admin/dining")}
-        />
-
-        <NavButton
-          icon="✦"
-          label="Experiences"
-          onClick={() => navigate("/admin/experiences")}
-        />
-
-        <NavButton
-          icon="◇"
-          label="Offers"
-          onClick={() => navigate("/admin/offers")}
-        />
-
-        <NavButton
-          icon="▧"
-          label="Gallery"
-          active
-          onClick={() => navigate("/admin/gallery")}
-        />
-
-        <NavButton
-          icon="⚙"
-          label="Settings"
-          onClick={() => navigate("/admin/settings")}
-        />
-
-        <div style={styles.sidebarBottom}>
-          <button
-            style={styles.logoutButton}
-            onClick={() => navigate("/admin")}
-          >
-            <span>↪</span>
-            Logout
-          </button>
-        </div>
-      </aside>
+      <AdminSidebar />
 
       <main style={styles.main} className="gallery-main">
         <header style={styles.header} className="gallery-header">
@@ -510,7 +439,7 @@ export default function GalleryManagement() {
           }
         }
 
-        @media (max-width: 900px) {
+        @media (max-width: 700px) {
           html,
           body,
           #root {
@@ -519,12 +448,6 @@ export default function GalleryManagement() {
             margin: 0;
             padding: 0;
             overflow-x: hidden;
-          }
-
-          .gallery-sidebar {
-            display: none !important;
-            width: 0 !important;
-            min-width: 0 !important;
           }
 
           .gallery-main {
@@ -596,21 +519,6 @@ export default function GalleryManagement() {
         }
       `}</style>
     </div>
-  );
-}
-
-function NavButton({ icon, label, active = false, onClick }) {
-  return (
-    <button
-      onClick={onClick}
-      style={{
-        ...styles.menuButton,
-        ...(active ? styles.activeMenu : {}),
-      }}
-    >
-      <span>{icon}</span>
-      {label}
-    </button>
   );
 }
 
@@ -816,96 +724,14 @@ const styles = {
     display: "flex",
   },
 
-  sidebar: {
-    width: 250,
-    minHeight: "100vh",
-    position: "fixed",
-    left: 0,
-    top: 0,
-    bottom: 0,
-    padding: "28px 18px",
-    background: "rgba(5, 18, 23, 0.97)",
-    borderRight: "1px solid rgba(255,255,255,0.07)",
-    zIndex: 10,
-  },
 
-  logoArea: {
-    display: "flex",
-    alignItems: "center",
-    gap: 12,
-    padding: "4px 10px 35px",
-  },
 
-  logoIcon: {
-    width: 38,
-    height: 38,
-    borderRadius: 10,
-    display: "grid",
-    placeItems: "center",
-    background: "#c9a86a",
-    color: "#07151a",
-    fontWeight: 800,
-    fontSize: 19,
-  },
 
-  logo: {
-    margin: 0,
-    fontSize: 16,
-    letterSpacing: 3,
-  },
 
-  logoSub: {
-    fontSize: 8,
-    letterSpacing: 2,
-    color: "#8b9a9e",
-  },
 
-  menuLabel: {
-    color: "#657579",
-    fontSize: 9,
-    letterSpacing: 2,
-    margin: "0 10px 12px",
-  },
 
-  menuButton: {
-    width: "100%",
-    border: "none",
-    background: "transparent",
-    color: "#8f9da0",
-    padding: "13px 12px",
-    borderRadius: 9,
-    textAlign: "left",
-    display: "flex",
-    gap: 12,
-    alignItems: "center",
-    marginBottom: 4,
-    fontSize: 13,
-  },
 
-  activeMenu: {
-    background: "rgba(201,168,106,0.12)",
-    color: "#d8bc84",
-  },
 
-  sidebarBottom: {
-    position: "absolute",
-    bottom: 25,
-    left: 18,
-    right: 18,
-  },
-
-  logoutButton: {
-    width: "100%",
-    padding: "13px 12px",
-    border: "1px solid rgba(255,255,255,0.08)",
-    borderRadius: 9,
-    background: "transparent",
-    color: "#8f9da0",
-    textAlign: "left",
-    display: "flex",
-    gap: 12,
-    alignItems: "center",
-  },
 
   main: {
     marginLeft: 250,

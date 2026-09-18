@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { useNavigate } from "react-router-dom";
+import AdminSidebar from "./AdminSidebar";
 
 const initialOffers = [
   {
@@ -66,8 +66,6 @@ const initialOffers = [
 ];
 
 export default function OffersManagement() {
-  const navigate = useNavigate();
-
   const [offers, setOffers] = useState(initialOffers);
   const [filter, setFilter] = useState("All");
   const [search, setSearch] = useState("");
@@ -167,45 +165,10 @@ export default function OffersManagement() {
 
   return (
     <div style={styles.page}>
-      <aside style={styles.sidebar} className="offers-sidebar">
-        <div style={styles.logoArea}>
-          <div style={styles.logoIcon}>P</div>
-          <div>
-            <h2 style={styles.logo}>PARADISE</h2>
-            <span style={styles.logoSub}>RESORT ADMIN</span>
-          </div>
-        </div>
-
-        <div style={styles.menuLabel}>MAIN MENU</div>
-
-        <NavButton icon="▦" label="Dashboard" onClick={() => navigate("/admin/dashboard")} />
-        <NavButton icon="▣" label="Bookings" onClick={() => navigate("/admin/bookings")} />
-        <NavButton icon="▤" label="Rooms" onClick={() => navigate("/admin/rooms")} />
-        <NavButton icon="🍽" label="Dining" onClick={() => navigate("/admin/dining")} />
-        <NavButton icon="✦" label="Experiences" onClick={() => navigate("/admin/experiences")} />
-        <NavButton icon="◇" label="Offers" active onClick={() => navigate("/admin/offers")} />
-        <NavButton icon="▧" label="Gallery" onClick={() => navigate("/admin/gallery")} />
-        <NavButton icon="⚙" label="Settings" onClick={() => navigate("/admin/settings")} />
-
-        <div style={styles.sidebarBottom}>
-          <button style={styles.logoutButton} onClick={() => navigate("/admin")}>
-            <span>↪</span>
-            Logout
-          </button>
-        </div>
-      </aside>
+      <AdminSidebar />
 
       <main style={styles.main} className="offers-main">
-        <div className="offers-mobile-nav">
-          <button onClick={() => navigate("/admin/dashboard")}>Dashboard</button>
-          <button onClick={() => navigate("/admin/bookings")}>Bookings</button>
-          <button onClick={() => navigate("/admin/rooms")}>Rooms</button>
-          <button onClick={() => navigate("/admin/dining")}>Dining</button>
-          <button onClick={() => navigate("/admin/experiences")}>Experiences</button>
-          <button className="active" onClick={() => navigate("/admin/offers")}>Offers</button>
-          <button onClick={() => navigate("/admin/gallery")}>Gallery</button>
-          <button onClick={() => navigate("/admin/settings")}>Settings</button>
-        </div>
+
         <header style={styles.header} className="offers-header">
           <div>
             <div style={styles.breadcrumb}>ADMIN / OFFERS</div>
@@ -490,33 +453,7 @@ export default function OffersManagement() {
           }
         }
 
-        @media (max-width: 900px) {
-          .offers-mobile-nav {
-            display: flex;
-            gap: 8px;
-            overflow-x: auto;
-            padding: 10px 0 16px;
-            margin-bottom: 8px;
-            scrollbar-width: thin;
-          }
-
-          .offers-mobile-nav button {
-            flex: 0 0 auto;
-            border: 1px solid rgba(255,255,255,0.08);
-            background: rgba(255,255,255,0.025);
-            color: #8f9da0;
-            padding: 9px 12px;
-            border-radius: 8px;
-            font-size: 11px;
-          }
-
-          .offers-mobile-nav button.active {
-            background: #c9a86a;
-            color: #07151a;
-            border-color: #c9a86a;
-            font-weight: 700;
-          }
-
+        @media (max-width: 700px) {
           html,
           body,
           #root {
@@ -525,12 +462,6 @@ export default function OffersManagement() {
             margin: 0;
             padding: 0;
             overflow-x: hidden;
-          }
-
-          .offers-sidebar {
-            display: none !important;
-            width: 0 !important;
-            min-width: 0 !important;
           }
 
           .offers-main {
