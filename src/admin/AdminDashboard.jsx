@@ -1071,7 +1071,7 @@ export default function AdminDashboard() {
            LARGE TABLET
         ================================= */
 
-        @media (max-width: 1200px) {
+        @media (max-width: 1050px) {
 
           .admin-main {
             width: calc(100% - 220px);
