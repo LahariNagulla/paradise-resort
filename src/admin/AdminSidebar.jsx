@@ -460,7 +460,7 @@ export default function AdminSidebar() {
            TABLET
         ===================================== */
 
-        @media (max-width: 1200px) {
+        @media (max-width: 1050px) {
 
           .admin-sidebar {
             width: 220px;
