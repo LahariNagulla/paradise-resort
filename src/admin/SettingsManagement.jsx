@@ -421,38 +421,71 @@ export default function SettingsManagement() {
         }
 
         @media (max-width: 900px) {
+          html,
+          body,
+          #root {
+            width: 100%;
+            min-width: 0;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+          }
+
           .settings-main {
             margin-left: 0 !important;
             width: 100% !important;
+            max-width: 100% !important;
+            min-width: 0 !important;
             padding: 28px 20px !important;
+            overflow-x: hidden !important;
           }
 
           .settings-header {
+            width: 100% !important;
             flex-direction: column !important;
             align-items: flex-start !important;
+            gap: 12px !important;
           }
 
           .settings-form-grid {
+            width: 100% !important;
             grid-template-columns: 1fr !important;
           }
 
           .settings-full-field {
             grid-column: auto !important;
+            width: 100% !important;
+          }
+
+          .settings-section {
+            width: 100% !important;
+            max-width: 100% !important;
+          }
+
+          .settings-system-box {
+            width: 100% !important;
           }
         }
 
         @media (max-width: 600px) {
+          .settings-main {
+            padding: 18px 12px !important;
+          }
+
           .settings-section {
-            padding: 20px !important;
+            padding: 18px !important;
+            border-radius: 12px !important;
           }
 
           .settings-section-heading {
             flex-direction: column !important;
             align-items: flex-start !important;
+            gap: 10px !important;
           }
 
           .settings-footer-actions {
             flex-direction: column-reverse !important;
+            width: 100% !important;
           }
 
           .settings-save,
@@ -463,7 +496,11 @@ export default function SettingsManagement() {
           .settings-system-box {
             flex-direction: column !important;
             align-items: flex-start !important;
-            gap: 20px !important;
+            gap: 18px !important;
+          }
+
+          .settings-header h1 {
+            font-size: 28px !important;
           }
         }
       `}</style>

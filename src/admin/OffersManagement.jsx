@@ -167,7 +167,7 @@ export default function OffersManagement() {
 
   return (
     <div style={styles.page}>
-      <aside style={styles.sidebar}>
+      <aside style={styles.sidebar} className="offers-sidebar">
         <div style={styles.logoArea}>
           <div style={styles.logoIcon}>P</div>
           <div>
@@ -206,7 +206,7 @@ export default function OffersManagement() {
           <button onClick={() => navigate("/admin/gallery")}>Gallery</button>
           <button onClick={() => navigate("/admin/settings")}>Settings</button>
         </div>
-        <header style={styles.header}>
+        <header style={styles.header} className="offers-header">
           <div>
             <div style={styles.breadcrumb}>ADMIN / OFFERS</div>
             <h1 style={styles.title} className="offers-title">Offers Management</h1>
@@ -517,17 +517,33 @@ export default function OffersManagement() {
             font-weight: 700;
           }
 
+          html,
+          body,
+          #root {
+            width: 100%;
+            min-width: 0;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+          }
+
           .offers-sidebar {
             display: none !important;
+            width: 0 !important;
+            min-width: 0 !important;
           }
 
           .offers-main {
             margin-left: 0 !important;
             width: 100% !important;
+            min-width: 0 !important;
+            max-width: 100% !important;
             padding: 28px 20px !important;
+            overflow-x: hidden !important;
           }
 
           .offers-header {
+            width: 100% !important;
             flex-direction: column !important;
             align-items: flex-start !important;
           }
@@ -539,12 +555,20 @@ export default function OffersManagement() {
 
           .offers-search {
             width: 100% !important;
+            max-width: 100% !important;
+          }
+
+          .offers-grid {
+            width: 100% !important;
+            grid-template-columns: 1fr !important;
           }
         }
 
         @media (max-width: 600px) {
           .offers-main {
-            padding: 22px 14px !important;
+            width: 100% !important;
+            max-width: 100% !important;
+            padding: 18px 12px !important;
           }
 
           .offers-header {
@@ -620,8 +644,11 @@ export default function OffersManagement() {
             min-height: 42px !important;
           }
 
+          .offers-form-grid {
+            grid-template-columns: 1fr !important;
+          }
+
           .offers-modal {
-            padding: 18px !important;
             border-radius: 12px !important;
             max-height: 94vh !important;
           }
@@ -888,6 +915,9 @@ const styles = {
       "radial-gradient(circle at top right, rgba(26, 77, 82, 0.18), transparent 30%), #07151a",
     color: "#f5f0e8",
     display: "flex",
+    width: "100%",
+    minWidth: 0,
+    overflowX: "hidden",
   },
 
   sidebar: {

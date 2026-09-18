@@ -188,7 +188,7 @@ export default function ExperiencesManagement() {
     <div style={styles.page}>
       {/* ================= SIDEBAR ================= */}
 
-      <aside style={styles.sidebar}>
+      <aside style={styles.sidebar} className="experience-sidebar">
         <div style={styles.logoArea}>
           <div style={styles.logoIcon}>P</div>
 
@@ -272,7 +272,7 @@ export default function ExperiencesManagement() {
 
       {/* ================= MAIN ================= */}
 
-      <main style={styles.main}>
+      <main style={styles.main} className="experience-main">
         {/* HEADER */}
 
         <header style={styles.header} className="experience-header">
@@ -861,7 +861,13 @@ export default function ExperiencesManagement() {
 
         @media (max-width: 900px) {
           .experience-sidebar {
-            display: none;
+            display: none !important;
+          }
+
+          .experience-main {
+            margin-left: 0 !important;
+            width: 100% !important;
+            padding: 25px 20px !important;
           }
         }
 

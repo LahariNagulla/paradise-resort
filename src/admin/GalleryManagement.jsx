@@ -170,7 +170,7 @@ export default function GalleryManagement() {
 
   return (
     <div style={styles.page}>
-      <aside style={styles.sidebar}>
+      <aside style={styles.sidebar} className="gallery-sidebar">
         <div style={styles.logoArea}>
           <div style={styles.logoIcon}>P</div>
           <div>
@@ -241,8 +241,8 @@ export default function GalleryManagement() {
         </div>
       </aside>
 
-      <main style={styles.main}>
-        <header style={styles.header}>
+      <main style={styles.main} className="gallery-main">
+        <header style={styles.header} className="gallery-header">
           <div>
             <div style={styles.breadcrumb}>ADMIN / GALLERY</div>
             <h1 style={styles.title}>Gallery Management</h1>
@@ -260,14 +260,14 @@ export default function GalleryManagement() {
           </button>
         </header>
 
-        <section style={styles.statsGrid}>
+        <section style={styles.statsGrid} className="gallery-stats">
           <StatCard label="Total Images" value={total} icon="▧" />
           <StatCard label="Active Images" value={active} icon="✓" />
           <StatCard label="Inactive Images" value={inactive} icon="◷" />
           <StatCard label="Categories" value={categories} icon="◇" />
         </section>
 
-        <section style={styles.toolbar}>
+        <section style={styles.toolbar} className="gallery-toolbar">
           <div style={styles.filters}>
             {categoryFilters.map((item) => (
               <button
@@ -289,10 +289,11 @@ export default function GalleryManagement() {
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             style={styles.search}
+            className="gallery-search"
           />
         </section>
 
-        <section style={styles.grid}>
+        <section style={styles.grid} className="gallery-grid">
           <AnimatePresence>
             {filteredGallery.map((item, index) => (
               <motion.div
@@ -418,12 +419,13 @@ export default function GalleryManagement() {
           >
             <motion.div
               style={styles.detailsModal}
+              className="gallery-details-modal"
               initial={{ opacity: 0, scale: 0.95, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95 }}
               onClick={(e) => e.stopPropagation()}
             >
-              <div style={styles.detailsImageArea}>
+              <div style={styles.detailsImageArea} className="gallery-details-image">
                 <img
                   src={selectedImage.image}
                   alt={selectedImage.title}
@@ -440,7 +442,7 @@ export default function GalleryManagement() {
                 </button>
               </div>
 
-              <div style={styles.detailsContent}>
+              <div style={styles.detailsContent} className="gallery-details-content">
                 <span style={styles.modalEyebrow}>
                   {selectedImage.id} / {selectedImage.category}
                 </span>
@@ -449,7 +451,7 @@ export default function GalleryManagement() {
                   {selectedImage.title}
                 </h2>
 
-                <div style={styles.detailsGrid}>
+                <div style={styles.detailsGrid} className="gallery-details-grid">
                   <Detail
                     label="Category"
                     value={selectedImage.category}
@@ -509,34 +511,71 @@ export default function GalleryManagement() {
         }
 
         @media (max-width: 900px) {
+          html,
+          body,
+          #root {
+            width: 100%;
+            min-width: 0;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+          }
+
           .gallery-sidebar {
             display: none !important;
+            width: 0 !important;
+            min-width: 0 !important;
           }
 
           .gallery-main {
             margin-left: 0 !important;
             width: 100% !important;
+            min-width: 0 !important;
+            max-width: 100% !important;
             padding: 28px 20px !important;
+            overflow-x: hidden !important;
           }
 
           .gallery-header {
+            width: 100% !important;
             flex-direction: column !important;
             align-items: flex-start !important;
           }
 
           .gallery-toolbar {
+            width: 100% !important;
             flex-direction: column !important;
             align-items: stretch !important;
           }
 
           .gallery-search {
             width: 100% !important;
+            max-width: 100% !important;
+          }
+
+          .gallery-grid {
+            width: 100% !important;
+            grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+          }
+
+          .gallery-stats {
+            width: 100% !important;
           }
         }
 
         @media (max-width: 650px) {
+          .gallery-main {
+            padding: 18px 12px !important;
+          }
+
+          .gallery-header {
+            gap: 14px !important;
+            margin-bottom: 22px !important;
+          }
+
           .gallery-grid {
             grid-template-columns: 1fr !important;
+            gap: 14px !important;
           }
 
           .gallery-stats {
